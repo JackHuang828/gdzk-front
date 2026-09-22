@@ -1,0 +1,1981 @@
+/* ============================================================
+ * 由 tools/extract-profile-css.mjs 从 2.1.1科技人才画像.html 内联样式自动生成，请勿手工编辑。
+ * 所有选择器限定在 .talent-profile-page 作用域内。
+ * @keyframes / @font-face 保持全局。
+ * ============================================================ */
+
+        .talent-profile-page * { margin: 0; padding: 0; box-sizing: border-box; }
+        .talent-profile-page { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif; background: #d8e7fc; color: #333; display: flex; flex-direction: column; font-size: 16px; }
+        .talent-profile-page #sidebar-container { flex-shrink: 0; }
+        
+        /* 主内容 */
+        .talent-profile-page .main-content { flex: 1; }
+        .talent-profile-page .page-title { font-size: 18px; font-weight: 600; color: #333; margin: 0; }
+        .talent-profile-page .breadcrumb-nav .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            color: #666;
+            margin: 0;
+        }
+        .talent-profile-page .breadcrumb-nav .breadcrumb i {
+            color: #999;
+            font-size: 12px;
+        }
+        .talent-profile-page .breadcrumb-nav .breadcrumb span {
+            color: #333;
+        }
+
+        /* ===== 详情工具栏 + 运行时重构布局（对齐原型 talent-profile-*.js 注入样式） ===== */
+        .talent-profile-page .profile-detail-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 58px; margin-bottom: 16px; padding: 0 18px; border: 1px solid #e8e8e8; border-radius: 8px; background: #fff; box-shadow: 0 2px 8px rgba(31, 35, 41, .04); }
+        .talent-profile-page .profile-detail-back { display: inline-flex; align-items: center; gap: 6px; flex: 0 0 auto; padding: 0; border: 0; color: #1677ff; background: transparent; font-size: 12px; cursor: pointer; }
+        .talent-profile-page .profile-detail-back:hover { color: #0e42d2; }
+        .talent-profile-page .profile-detail-heading { display: flex; align-items: baseline; gap: 10px; min-width: 0; margin-right: auto; }
+        .talent-profile-page .profile-detail-heading span { color: #86909c; font-size: 12px; }
+        .talent-profile-page .profile-detail-heading strong { overflow: hidden; color: #1d2129; font-size: 16px; text-overflow: ellipsis; white-space: nowrap; }
+        .talent-profile-page .profile-detail-actions { display: flex; align-items: center; justify-content: flex-end; gap: 8px; flex-wrap: wrap; }
+        .talent-profile-page .profile-detail-actions button { display: inline-flex; align-items: center; gap: 6px; height: 31px; padding: 0 10px; border: 1px solid #d5e5f5; border-radius: 5px; color: #3572a8; background: #fff; font-size: 11px; cursor: pointer; }
+        .talent-profile-page .profile-detail-actions button:hover { border-color: #91caff; color: #1677ff; background: #f0f7ff; }
+
+        .talent-profile-page .profile-split { display: flex; gap: 24px; align-items: flex-start; }
+        .talent-profile-page .profile-detail-split { display: block !important; }
+        .talent-profile-page .profile-detail-split > .profile-body { width: 100%; }
+        .talent-profile-page .profile-body { flex: 1; min-width: 0; }
+        .talent-profile-page .profile-summary { display: flex; align-items: center; gap: 20px; padding: 22px 24px; background: #fff; border: 1px solid #e8e8e8; border-radius: 8px; margin-bottom: 16px; }
+        .talent-profile-page .profile-summary .expert-profile-avatar { width: 88px; height: 88px; font-size: 34px; }
+        .talent-profile-page .profile-section-nav { position: sticky; top: 12px; z-index: 80; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; padding: 10px; margin-bottom: 16px; background: #fff; border: 1px solid #e8e8e8; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,.05); }
+        .talent-profile-page .profile-section-nav a { display: inline-flex; align-items: center; gap: 7px; min-height: 36px; padding: 0 14px; border: 1px solid #d9d9d9; border-radius: 6px; color: #666; font-size: 13px; text-decoration: none; background: #fff; cursor: pointer; }
+        .talent-profile-page .profile-section-nav a:hover { color: #1890ff; border-color: #1890ff; background: #e6f7ff; }
+        .talent-profile-page .profile-section-nav a.active { color: #fff !important; border-color: #1890ff; background: #1890ff; }
+        /* 四大模块纵向铺开（与原型渲染结果一致：display:block!important 覆盖 .module-content 的切换隐藏） */
+        .talent-profile-page .module-content.profile-content-section { display: block !important; background: #f5f7fa; border: 1px solid #e8e8e8; border-radius: 8px; padding: 18px; margin-bottom: 18px; min-height: 0; scroll-margin-top: 140px; }
+        .talent-profile-page .module-content.profile-content-section > .expert-detail-panel { background: transparent !important; padding: 0 !important; border-radius: 0 !important; box-shadow: none !important; max-height: none !important; overflow: visible !important; }
+        .talent-profile-page .profile-card-head { display: flex; align-items: center; gap: 10px; min-height: 46px; padding: 0 6px 12px; color: #333; font-size: 17px; font-weight: 600; }
+        .talent-profile-page .profile-card-head i { color: #1890ff; }
+        .talent-profile-page .profile-selection-note { margin: 0 0 12px; padding: 8px 10px; border: 1px solid #bed5ff; border-radius: 4px; background: #edf4ff; color: #165dff; font-size: 12px; }
+        .talent-profile-page .gkx-quick { position: fixed; right: 24px; bottom: 78px; z-index: 9000; display: flex; gap: 8px; flex-direction: column; align-items: flex-end; }
+        .talent-profile-page .gkx-quick .gkx-btn { background: #fff; box-shadow: 0 4px 16px rgba(31, 61, 104, .14); border: 0; border-radius: 8px; padding: 9px 14px; color: #1677ff; font-size: 13px; cursor: pointer; }
+        .talent-profile-page .gkx-quick .gkx-btn.primary { background: #1677ff; color: #fff; }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .talent-profile-page .main-content { padding: 72px 20px 20px 20px; }
+            .talent-profile-page #sidebar-container { display: none; }
+        }
+        .talent-profile-page .empty-state i {
+            font-size: 64px;
+            margin-bottom: 20px;
+            color: #d9d9d9;
+        }
+        .talent-profile-page .empty-state h3 {
+            font-size: 20px;
+            color: #666;
+            margin-bottom: 12px;
+        }
+        .talent-profile-page .empty-state p {
+            font-size: 14px;
+            color: #999;
+        }
+
+        /* 模块内容区域 */
+        .talent-profile-page .module-content {
+            display: none;
+            background: #fff;
+            border-radius: 8px;
+            padding: 24px;
+            min-height: 400px;
+        }
+        .talent-profile-page .module-content.active {
+            display: block;
+        }
+        .talent-profile-page .filter-tag {
+            padding: 6px 12px;
+            background: #fff;
+            border: 1px solid #d9d9d9;
+            border-radius: 4px;
+            font-size: 12px;
+            color: #666;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .talent-profile-page .filter-tag:hover {
+            border-color: #1890ff;
+            color: #1890ff;
+        }
+        .talent-profile-page .filter-tag.active {
+            background: #1890ff;
+            border-color: #1890ff;
+            color: #fff;
+        }
+        .talent-profile-page .expert-item.active {
+            background: #e6f7ff;
+            border-color: #1890ff;
+        }
+
+        .talent-profile-page .expert-detail-panel {
+            flex: 1;
+            background: #f5f7fa;
+            border-radius: 8px;
+            padding: 24px;
+            overflow-y: auto;
+            max-height: 700px;
+        }
+
+        .talent-profile-page .expert-profile-header { position: relative; }
+        .talent-profile-page .expert-profile-header-actions { display: flex; align-items: flex-start; gap: 14px; margin-left: auto; white-space: nowrap; }
+        .talent-profile-page .profile-header-action { padding: 2px 0; border: 0; background: transparent; color: #1890ff; font-size: 13px; cursor: pointer; }
+        .talent-profile-page .profile-header-action:hover { color: #096dd9; text-decoration: underline; }
+        .talent-profile-page .profile-header-action.danger { color: #1890ff; }
+
+        .talent-profile-page .profile-tag { cursor: pointer; transition: all 0.2s; }
+        .talent-profile-page .profile-tag:hover, .talent-profile-page .profile-tag.active { background: #1890ff; border-color: #1890ff; color: #fff; }
+        .talent-profile-page .profile-detail-tabs { display: flex; flex-wrap: wrap; gap: 8px; padding: 0 0 16px; margin-bottom: 20px; border-bottom: 1px solid #e8e8e8; }
+        .talent-profile-page .profile-detail-tab { padding: 8px 14px; border: 1px solid #d9d9d9; border-radius: 6px; background: #fff; color: #666; cursor: pointer; font-size: 13px; transition: all 0.2s; }
+        .talent-profile-page .profile-detail-tab:hover { border-color: #1890ff; color: #1890ff; }
+        .talent-profile-page .profile-detail-tab.active { border-color: #1890ff; background: #1890ff; color: #fff; }
+        .talent-profile-page .profile-detail-panel { display: none; }
+        .talent-profile-page .profile-detail-panel.active { display: block; }
+        .talent-profile-page .network-card { padding: 12px; border: 1px solid #e8e8e8; border-radius: 8px; background: #fbfdff; }
+        .talent-profile-page .network-svg { display: block; width: 100%; height: 360px; }
+        .talent-profile-page .network-edge { stroke: #b7c8e5; stroke-width: 1.5; }
+        .talent-profile-page .network-node { fill: #e6f7ff; stroke: #1890ff; stroke-width: 1.5; }
+        .talent-profile-page .network-node.center { fill: #1890ff; stroke: #096dd9; }
+        .talent-profile-page .network-node-text { fill: #334155; font-size: 12px; text-anchor: middle; dominant-baseline: middle; }
+        .talent-profile-page .network-node-text.center { fill: #fff; font-weight: 600; }
+        /* 合作关系网节点交互：周边节点可点击查看合作证据（中心节点不响应） */
+        .talent-profile-page .network-node-group { cursor: pointer; }
+        .talent-profile-page .network-node-group.center { cursor: default; }
+        .talent-profile-page .network-node-group:not(.center):hover .network-node { fill: #bae7ff; stroke: #096dd9; stroke-width: 2; }
+        .talent-profile-page .network-node-group:not(.center):hover .network-node-text { fill: #096dd9; font-weight: 600; }
+        .talent-profile-page .network-note { padding: 10px 12px; margin-top: 10px; border-left: 3px solid #1890ff; border-radius: 4px; background: #f0f8ff; color: #667085; font-size: 12px; line-height: 1.7; }
+        .talent-profile-page .tag-data-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .talent-profile-page .tag-data-list { display: grid; gap: 10px; align-content: start; }
+        .talent-profile-page .tag-data-item { padding: 13px 14px; border: 1px solid #e8e8e8; border-radius: 6px; background: #fafafa; }
+        .talent-profile-page .tag-data-item-title { margin-bottom: 6px; color: #333; font-size: 13px; font-weight: 600; line-height: 1.5; }
+        .talent-profile-page .tag-data-item-meta { color: #8c8c8c; font-size: 12px; line-height: 1.7; }
+        .talent-profile-page .tag-data-badge { display: inline-block; padding: 2px 7px; margin-left: 6px; border-radius: 3px; background: #e6f7ff; color: #1890ff; font-size: 11px; }
+        .talent-profile-page .tag-data-title { margin-bottom: 12px; color: #333; font-size: 14px; font-weight: 600; }
+        .talent-profile-page .tag-empty { padding: 35px 15px; color: #999; text-align: center; font-size: 13px; }
+        .talent-profile-page .tag-project-item { display: grid; grid-template-columns: 1fr auto; gap: 12px; align-items: start; }
+        .talent-profile-page .tag-project-status { color: #52c41a; font-size: 12px; white-space: nowrap; }
+        .talent-profile-page .time-range-fields label { display: block; margin-bottom: 6px; color: #666; font-size: 12px; }
+        .talent-profile-page .time-range-fields input { width: 100%; padding: 9px 10px; border: 1px solid #d9d9d9; border-radius: 5px; font-size: 13px; }
+        .talent-profile-page .import-dropzone i { display: block; margin-bottom: 10px; color: #1890ff; font-size: 28px; }
+        .talent-profile-page .import-dropzone p { margin-bottom: 12px; color: #667085; font-size: 13px; }
+        @media (max-width: 900px) { .talent-profile-page .tag-data-layout { grid-template-columns: 1fr; } }
+
+        .talent-profile-page .expert-profile-header {
+            display: flex;
+            gap: 24px;
+            margin-bottom: 32px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid #e8e8e8;
+        }
+        .talent-profile-page .expert-profile-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 48px;
+            font-weight: 600;
+        }
+        .talent-profile-page .expert-profile-info {
+            flex: 1;
+        }
+        .talent-profile-page .expert-profile-name {
+            font-size: 24px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 8px;
+        }
+        .talent-profile-page .expert-profile-title {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 12px;
+        }
+        .talent-profile-page .expert-profile-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .talent-profile-page .profile-tag {
+            padding: 6px 12px;
+            background: #e6f7ff;
+            border: 1px solid #91d5ff;
+            border-radius: 4px;
+            font-size: 12px;
+            color: #1890ff;
+        }
+
+        .talent-profile-page .profile-section {
+            background: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .talent-profile-page .profile-section-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .talent-profile-page .profile-section-title i {
+            color: #1890ff;
+        }
+        .talent-profile-page .info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+        .talent-profile-page .info-item {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .talent-profile-page .info-label {
+            font-size: 12px;
+            color: #999;
+        }
+        .talent-profile-page .info-value {
+            font-size: 14px;
+            color: #333;
+        }
+        .talent-profile-page .info-value.clickable {
+            color: #1890ff;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .talent-profile-page .info-value.clickable:hover {
+            text-decoration: underline;
+        }
+
+        .talent-profile-page .timeline-item {
+            position: relative;
+            padding-left: 24px;
+            padding-bottom: 20px;
+            border-left: 2px solid #e8e8e8;
+        }
+        .talent-profile-page .timeline-item:last-child {
+            border-left: none;
+        }
+        .talent-profile-page .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -6px;
+            top: 0;
+            width: 10px;
+            height: 10px;
+            background: #1890ff;
+            border-radius: 50%;
+        }
+        .talent-profile-page .timeline-year {
+            font-size: 12px;
+            color: #999;
+            margin-bottom: 4px;
+        }
+        .talent-profile-page .timeline-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 4px;
+        }
+        .talent-profile-page .timeline-organization {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 4px;
+        }
+        .talent-profile-page .timeline-organization.clickable {
+            color: #1890ff;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .talent-profile-page .timeline-organization.clickable:hover {
+            text-decoration: underline;
+        }
+        .talent-profile-page .timeline-description {
+            font-size: 13px;
+            color: #999;
+        }
+        .talent-profile-page .timeline-achievement {
+            margin-top: 8px;
+        }
+        .talent-profile-page .achievement-item {
+            padding: 8px 14px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8f4ff 100%);
+            border-radius: 6px;
+            font-size: 13px;
+            color: #333;
+            margin-bottom: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 1px solid #e8e8e8;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .talent-profile-page .achievement-item::before {
+            content: '\f0da';
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            color: #1890ff;
+            font-size: 12px;
+        }
+        .talent-profile-page .achievement-item:hover {
+            background: linear-gradient(135deg, #e6f7ff 0%, #bae7ff 100%);
+            color: #1890ff;
+            border-color: #1890ff;
+            transform: translateX(4px);
+            box-shadow: 0 2px 8px rgba(24, 144, 255, 0.2);
+        }
+        
+        /* 项目详情弹窗样式 */
+        .talent-profile-page .project-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            animation: fadeIn 0.3s ease;
+        }
+        .talent-profile-page .project-modal-content {
+            background: #fff;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            animation: slideUp 0.3s ease;
+        }
+        .talent-profile-page .project-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 24px;
+            border-bottom: 1px solid #e8e8e8;
+            background: linear-gradient(135deg, #f8fbff 0%, #fff 100%);
+        }
+        .talent-profile-page .project-modal-header h3 {
+            font-size: 18px;
+            color: #333;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .talent-profile-page .project-modal-header h3 i {
+            color: #1890ff;
+        }
+        .talent-profile-page .project-modal-close {
+            width: 32px;
+            height: 32px;
+            border: none;
+            background: #f5f5f5;
+            border-radius: 6px;
+            cursor: pointer;
+            color: #999;
+            font-size: 20px;
+            line-height: 1;
+            transition: all 0.3s;
+        }
+        .talent-profile-page .project-modal-close:hover {
+            background: #ff4d4f;
+            color: #fff;
+        }
+        .talent-profile-page .project-modal-body {
+            padding: 24px;
+        }
+        .talent-profile-page .project-section {
+            margin-bottom: 20px;
+        }
+        .talent-profile-page .project-section:last-child {
+            margin-bottom: 0;
+        }
+        .talent-profile-page .project-section h4 {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .talent-profile-page .project-section h4 i {
+            color: #1890ff;
+            font-size: 14px;
+        }
+        .talent-profile-page .project-section p {
+            font-size: 13px;
+            color: #666;
+            line-height: 1.8;
+            margin: 0;
+        }
+        .talent-profile-page .project-section ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .talent-profile-page .project-section li {
+            font-size: 13px;
+            color: #666;
+            padding: 6px 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+        }
+        .talent-profile-page .project-section li i {
+            color: #52c41a;
+            margin-top: 2px;
+            flex-shrink: 0;
+        }
+        .talent-profile-page .project-modal-footer {
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+            padding: 16px 24px;
+            border-top: 1px solid #e8e8e8;
+            background: #f8faff;
+        }
+        .talent-profile-page .btn-secondary {
+            padding: 8px 20px;
+            background: #fff;
+            border: 1px solid #d9d9d9;
+            border-radius: 6px;
+            color: #666;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .talent-profile-page .btn-secondary:hover {
+            border-color: #1890ff;
+            color: #1890ff;
+        }
+        .talent-profile-page .btn-primary {
+            padding: 8px 20px;
+            background: linear-gradient(135deg, #1890ff 0%, #096dd9 100%);
+            border: none;
+            border-radius: 6px;
+            color: #fff;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .talent-profile-page .btn-primary:hover {
+            background: linear-gradient(135deg, #40a9ff 0%, #1890ff 100%);
+            box-shadow: 0 4px 12px rgba(24, 144, 255, 0.3);
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .talent-profile-page .action-buttons {
+            display: flex;
+            gap: 8px;
+            margin-top: 16px;
+        }
+        .talent-profile-page .action-btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* 关联信息样式 */
+        .talent-profile-page .relation-header {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+        .talent-profile-page .relation-card {
+            background: #fff;
+            border: 1px solid #e8e8e8;
+            border-radius: 8px;
+            padding: 20px;
+            color: #333;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .talent-profile-page .relation-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(102, 126, 234, 0.3);
+        }
+        .talent-profile-page .relation-card-icon {
+            font-size: 32px;
+            margin-bottom: 12px;
+            opacity: 0.9;
+            color: #1890ff;
+        }
+        .talent-profile-page .relation-card-number {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+        .talent-profile-page .relation-card-label {
+            font-size: 13px;
+            color: #666;
+        }
+
+        .talent-profile-page .relation-topic-pie {
+            width: 200px;
+            height: 200px;
+            flex: 0 0 200px;
+            cursor: pointer;
+        }
+        .talent-profile-page .relation-pie-sector {
+            cursor: pointer;
+            stroke: #fff;
+            stroke-width: 2;
+            transition: opacity 0.2s, filter 0.2s, stroke-width 0.2s;
+            transform-origin: 100px 100px;
+        }
+        .talent-profile-page .relation-pie-sector:hover, .talent-profile-page .relation-pie-sector.active {
+            filter: brightness(1.12) drop-shadow(0 2px 3px rgba(24, 144, 255, 0.35));
+            stroke: #1677ff;
+            stroke-width: 4;
+        }
+        .talent-profile-page .relation-topic-pie.has-selection .relation-pie-sector:not(.active) {
+            opacity: 0.42;
+        }
+
+        .talent-profile-page .topic-distribution {
+            background: #f5f7fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .talent-profile-page .topic-chart-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+            gap: 20px;
+        }
+        .talent-profile-page .topic-legend {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .talent-profile-page .topic-legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            color: #666;
+        }
+        .talent-profile-page .topic-legend-color {
+            width: 16px;
+            height: 16px;
+            border-radius: 4px;
+        }
+
+        .talent-profile-page .scholar-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 12px;
+        }
+        .talent-profile-page .scholar-card {
+            background: #fff;
+            border: 1px solid #e8e8e8;
+            border-radius: 8px;
+            padding: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .talent-profile-page .scholar-card:hover {
+            border-color: #1890ff;
+            box-shadow: 0 2px 8px rgba(24, 144, 255, 0.1);
+        }
+        .talent-profile-page .scholar-card-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+        .talent-profile-page .scholar-card-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 16px;
+            font-weight: 600;
+        }
+        .talent-profile-page .scholar-card-name {
+            font-size: 12px;
+            font-weight: 600;
+            color: #333;
+        }
+        .talent-profile-page .scholar-card-meta {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 8px;
+        }
+        .talent-profile-page .scholar-card-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+        .talent-profile-page .scholar-card-tag {
+            padding: 4px 10px;
+            background: #e6f7ff;
+            border: 1px solid #91d5ff;
+            border-radius: 4px;
+            font-size: 11px;
+            color: #1890ff;
+        }
+
+        .talent-profile-page .paper-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .talent-profile-page .paper-card {
+            background: #f5f7fa;
+            border-radius: 8px;
+            padding: 16px;
+            border: 1px solid #e8e8e8;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .talent-profile-page .paper-card:hover {
+            border-color: #1890ff;
+            box-shadow: 0 2px 8px rgba(24, 144, 255, 0.1);
+        }
+        .talent-profile-page .paper-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+        }
+        .talent-profile-page .paper-venue {
+            font-size: 12px;
+            color: #1890ff;
+            margin-bottom: 4px;
+        }
+        .talent-profile-page .paper-meta {
+            display: flex;
+            gap: 16px;
+            font-size: 12px;
+            color: #666;
+        }
+        .talent-profile-page .paper-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .talent-profile-page .paper-abstract {
+            font-size: 12px;
+            color: #999;
+            line-height: 1.6;
+        }
+
+        .talent-profile-page .title-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .talent-profile-page .title-card {
+            background: #f5f7fa;
+            border-radius: 8px;
+            padding: 16px;
+            border: 1px solid #e8e8e8;
+            cursor: pointer;
+            transition: all 0.3s;
+            flex: 1;
+            min-width: 300px;
+        }
+        .talent-profile-page .title-card:hover {
+            border-color: #1890ff;
+            box-shadow: 0 2px 8px rgba(24, 144, 255, 0.1);
+        }
+        .talent-profile-page .title-card-label {
+            font-size: 11px;
+            color: #999;
+            margin-bottom: 4px;
+        }
+        .talent-profile-page .title-card-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: #333;
+        }
+        .talent-profile-page .nav-tab.active {
+            background: #1890ff;
+            border-color: #1890ff;
+            color: #fff;
+        }
+
+        .talent-profile-page .detail-section {
+            display: none;
+        }
+        .talent-profile-page .detail-section.active {
+            display: block;
+        }
+
+        .talent-profile-page .behavior-detail-tabs {
+            display: flex;
+            gap: 10px;
+            padding: 6px;
+            margin-bottom: 20px;
+            background: #eef5ff;
+            border: 1px solid #d6e4ff;
+            border-radius: 10px;
+        }
+        .talent-profile-page .behavior-detail-tab {
+            flex: 1;
+            min-height: 42px;
+            border: 1px solid transparent;
+            border-radius: 7px;
+            background: transparent;
+            color: #59708d;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+        .talent-profile-page .behavior-detail-tab i {
+            margin-right: 7px;
+        }
+        .talent-profile-page .behavior-detail-tab:hover {
+            color: #1677ff;
+            background: #fff;
+        }
+        .talent-profile-page .behavior-detail-tab.active {
+            color: #fff;
+            background: linear-gradient(135deg, #1677ff 0%, #4096ff 100%);
+            box-shadow: 0 4px 10px rgba(22, 119, 255, 0.22);
+        }
+        .talent-profile-page .behavior-section-panel.active {
+            display: block;
+        }
+        @keyframes behaviorPanelIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @media (max-width: 700px) {
+            .talent-profile-page .behavior-detail-tabs { flex-direction: column; }
+        }
+
+        /* 人才迁徙路径样式 */
+        .talent-profile-page .migration-timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+        .talent-profile-page .migration-item {
+            position: relative;
+            padding-bottom: 32px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .talent-profile-page .migration-item:hover {
+            background: #e6f7ff;
+            padding: 12px;
+            margin: -12px;
+            border-radius: 8px;
+        }
+        .talent-profile-page .migration-item::before {
+            content: '';
+            position: absolute;
+            left: -30px;
+            top: 12px;
+            width: 2px;
+            height: calc(100% + 8px);
+            background: #e8e8e8;
+        }
+        .talent-profile-page .migration-item:last-child::before {
+            display: none;
+        }
+        .talent-profile-page .migration-dot {
+            position: absolute;
+            left: -38px;
+            top: 12px;
+            width: 14px;
+            height: 14px;
+            background: #d9d9d9;
+            border-radius: 50%;
+            border: 3px solid #fff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .talent-profile-page .migration-dot.active {
+            background: #1890ff;
+            width: 16px;
+            height: 16px;
+            left: -39px;
+        }
+        .talent-profile-page .migration-location {
+            font-size: 12px;
+            color: #999;
+            margin-bottom: 4px;
+        }
+        .talent-profile-page .migration-organization {
+            font-size: 12px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 4px;
+        }
+        .talent-profile-page .migration-organization.clickable {
+            color: #1890ff;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .talent-profile-page .migration-organization.clickable:hover {
+            text-decoration: underline;
+        }
+        .talent-profile-page .migration-duration {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 4px;
+        }
+        .talent-profile-page .migration-role {
+            font-size: 12px;
+            color: #999;
+        }
+        .talent-profile-page .migration-detail {
+            display: none;
+            margin: 10px 0 10px 20px;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            border-left: 3px solid #1890ff;
+            animation: slideDown 0.3s ease;
+        }
+        .talent-profile-page .migration-detail.show {
+            display: block;
+        }
+        .talent-profile-page .migration-detail-content {
+            position: relative;
+        }
+        .talent-profile-page .migration-item.active .migration-dot {
+            background: #722ed1;
+            transform: scale(1.2);
+        }
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 科研成长轨迹样式 */
+        .talent-profile-page .milestone-timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+        .talent-profile-page .milestone-item {
+            position: relative;
+            padding-bottom: 24px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .talent-profile-page .milestone-item:hover {
+            background: #fff7e6;
+            padding: 12px;
+            margin: -12px;
+            border-radius: 8px;
+        }
+        .talent-profile-page .milestone-item::before {
+            content: '';
+            position: absolute;
+            left: -30px;
+            top: 12px;
+            width: 2px;
+            height: calc(100% + 8px);
+            background: linear-gradient(to bottom, #52c41a, #722ed1, #1890ff, #fa8c16, #eb2f96, #f5222d, #cf1322, #a8071a);
+        }
+        .talent-profile-page .milestone-item:last-child::before {
+            display: none;
+        }
+        .talent-profile-page .milestone-dot {
+            position: absolute;
+            left: -38px;
+            top: 12px;
+            width: 14px;
+            height: 14px;
+            background: #d9d9d9;
+            border-radius: 50%;
+            border: 3px solid #fff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .talent-profile-page .milestone-dot.active {
+            width: 18px;
+            height: 18px;
+            left: -40px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        .talent-profile-page .milestone-year {
+            font-size: 12px;
+            color: #999;
+            margin-bottom: 4px;
+        }
+        .talent-profile-page .milestone-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 4px;
+        }
+        .talent-profile-page .milestone-score {
+            font-size: 12px;
+            color: #666;
+            background: #f5f7fa;
+            padding: 2px 8px;
+            border-radius: 4px;
+            display: inline-block;
+        }
+        .talent-profile-page .milestone-detail-header h3 {
+            margin: 0 0 8px 0;
+            font-size: 20px;
+        }
+        .talent-profile-page .milestone-detail-section h4 {
+            font-size: 14px;
+            color: #1890ff;
+            margin: 0 0 12px 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .talent-profile-page .milestone-detail-section p {
+            margin: 0;
+            color: #333;
+            line-height: 1.8;
+        }
+        .talent-profile-page .milestone-events-list li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 10px;
+            color: #333;
+            line-height: 1.6;
+        }
+        .talent-profile-page .milestone-events-list li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 8px;
+            width: 8px;
+            height: 8px;
+            background: #52c41a;
+            border-radius: 50%;
+        }
+        .talent-profile-page .milestone-events-list li:last-child {
+            margin-bottom: 0;
+        }
+
+        /* 合作企业样式 */
+        .talent-profile-page .collaboration-metrics {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+        .talent-profile-page .collab-metric-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 8px;
+            padding: 20px;
+            color: #fff;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .talent-profile-page .collab-metric-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(102, 126, 234, 0.3);
+        }
+        .talent-profile-page .collab-metric-value {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+        .talent-profile-page .collab-metric-label {
+            font-size: 13px;
+            opacity: 0.9;
+        }
+        .talent-profile-page .collab-metric-card.clickable:hover {
+            opacity: 0.9;
+        }
+
+        .talent-profile-page .company-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .talent-profile-page .company-card {
+            background: #fff;
+            border: 1px solid #e8e8e8;
+            border-radius: 8px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .talent-profile-page .company-card:hover {
+            border-color: #1890ff;
+            box-shadow: 0 4px 12px rgba(24, 144, 255, 0.15);
+        }
+        .talent-profile-page .company-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #e8e8e8;
+        }
+        .talent-profile-page .company-name {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+        }
+        .talent-profile-page .company-name.clickable {
+            color: #1890ff;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .talent-profile-page .company-name.clickable:hover {
+            text-decoration: underline;
+        }
+        .talent-profile-page .company-logo {
+            width: 48px;
+            height: 48px;
+            background: #f5f7fa;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .talent-profile-page .company-info-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+        .talent-profile-page .company-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .talent-profile-page .company-tag {
+            padding: 4px 12px;
+            background: #e6f7ff;
+            border: 1px solid #91d5ff;
+            border-radius: 4px;
+            font-size: 12px;
+            color: #1890ff;
+        }
+
+        /* 弹窗样式 */
+        .talent-profile-page .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+        }
+        .talent-profile-page .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .talent-profile-page .modal-container {
+            background: #fff;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 900px;
+            max-height: 80vh;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            transform: translateY(-20px);
+            transition: all 0.3s;
+        }
+        .talent-profile-page .modal-overlay.active .modal-container {
+            transform: translateY(0);
+        }
+        .talent-profile-page .modal-header {
+            padding: 24px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .talent-profile-page .modal-title {
+            font-size: 20px;
+            font-weight: 600;
+        }
+        .talent-profile-page .modal-close {
+            width: 32px;
+            height: 32px;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            border-radius: 50%;
+            color: #fff;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+        .talent-profile-page .modal-close:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        .talent-profile-page .modal-body {
+            padding: 24px;
+            max-height: calc(80vh - 100px);
+            overflow-y: auto;
+        }
+        .talent-profile-page .source-list {
+            max-height: 500px;
+            overflow-y: auto;
+        }
+        .talent-profile-page .source-item {
+            transition: all 0.3s;
+        }
+        .talent-profile-page .source-item:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-color: #1890ff;
+        }
+        .talent-profile-page .metric-breakdown {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+        .talent-profile-page .patent-table, .talent-profile-page .project-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 16px;
+        }
+        .talent-profile-page .patent-table th, .talent-profile-page .patent-table td, .talent-profile-page .project-table th, .talent-profile-page .project-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #e8e8e8;
+        }
+        .talent-profile-page .patent-table th, .talent-profile-page .project-table th {
+            background: #f5f7fa;
+            font-weight: 600;
+            color: #333;
+            font-size: 13px;
+        }
+        .talent-profile-page .patent-table td, .talent-profile-page .project-table td {
+            font-size: 13px;
+            color: #666;
+        }
+        .talent-profile-page .patent-table tr:hover, .talent-profile-page .project-table tr:hover {
+            background: #f0f5ff;
+        }
+        .talent-profile-page .ideology-intro h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        .talent-profile-page .ideology-intro p {
+            font-size: 14px;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+        .talent-profile-page .ideology-section h4 {
+            font-size: 12px;
+            color: #333;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        .talent-profile-page .ideology-section h4 i {
+            color: #667eea;
+        }
+        .talent-profile-page .indicator-basis i {
+            color: #999;
+            margin-top: 2px;
+        }
+        .talent-profile-page .statement-meta span {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .talent-profile-page .source-tag i {
+            font-size: 11px;
+        }
+        .talent-profile-page .detail-tab.active {
+            background: #667eea;
+            color: white;
+        }
+        .talent-profile-page .detail-tab-content.active { display: block; }
+        .talent-profile-page .paper-rank.top { background: #ff4d4f22; color: #ff4d4f; }
+        .talent-profile-page .paper-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+            line-height: 1.5;
+        }
+        .talent-profile-page .paper-detail-meta span { display: flex; align-items: center; gap: 4px; }
+        .talent-profile-page .bar-label {
+            width: 120px;
+            font-size: 13px;
+            color: #666;
+            flex-shrink: 0;
+        }
+        .talent-profile-page .bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 4px;
+            transition: width 0.3s;
+        }
+        .talent-profile-page .bar-fill.blue { background: linear-gradient(90deg, #1890ff, #096dd9); }
+        .talent-profile-page .bar-fill.purple { background: linear-gradient(90deg, #722ed1, #531d93); }
+        .talent-profile-page .bar-fill.orange { background: linear-gradient(90deg, #fa8c16, #d46b08); }
+        .talent-profile-page .bar-value {
+            width: 60px;
+            text-align: right;
+            font-size: 13px;
+            color: #333;
+            font-weight: 600;
+        }
+        .talent-profile-page .summary-stat .stat-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: #333;
+        }
+        .talent-profile-page .summary-stat .stat-value.green { color: #52c41a; }
+        .talent-profile-page .summary-stat .stat-label {
+            font-size: 12px;
+            color: #888;
+            margin-top: 4px;
+        }
+        .talent-profile-page .trend-bars {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-around;
+            height: 180px;
+            padding: 20px 10px 30px;
+            background: #fafafa;
+            border-radius: 8px;
+        }
+        .talent-profile-page .trend-bar-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 60px;
+        }
+        .talent-profile-page .trend-bar {
+            width: 40px;
+            background: linear-gradient(to top, #667eea, #764ba2);
+            border-radius: 4px 4px 0 0;
+            min-height: 20px;
+        }
+        .talent-profile-page .trend-bar-item.highlight .trend-bar {
+            background: linear-gradient(to top, #52c41a, #73d13d);
+        }
+        .talent-profile-page .trend-year {
+            font-size: 12px;
+            color: #999;
+        }
+        .talent-profile-page .hindex-desc p {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.7;
+            margin-bottom: 8px;
+        }
+        .talent-profile-page .hindex-desc strong { color: #667eea; }
+        .talent-profile-page .detail-section-title {
+            font-size: 12px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .talent-profile-page .detail-section-title i { color: #667eea; }
+        .talent-profile-page .hindex-stat .stat-value {
+            font-size: 20px;
+            font-weight: 700;
+            color: #333;
+        }
+        .talent-profile-page .hindex-stat .stat-label {
+            font-size: 11px;
+            color: #888;
+            margin-top: 4px;
+        }
+        .talent-profile-page .rank-item i { color: #667eea; }
+        .talent-profile-page .rank-item strong { color: #667eea; }
+        .talent-profile-page .patent-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+            line-height: 1.5;
+            flex: 1;
+        }
+        .talent-profile-page .patent-status {
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+            flex-shrink: 0;
+        }
+        .talent-profile-page .patent-status.granted {
+            background: #52c41a22;
+            color: #52c41a;
+        }
+        .talent-profile-page .patent-status.pending {
+            background: #faad1422;
+            color: #faad14;
+        }
+        .talent-profile-page .status-badge {
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 500;
+        }
+        .talent-profile-page .status-badge.granted {
+            background: #f6ffed;
+            color: #52c41a;
+            border: 1px solid #b7eb8f;
+        }
+        .talent-profile-page .status-badge.pending {
+            background: #fff7e6;
+            color: #fa8c16;
+            border: 1px solid #ffd591;
+        }
+        .talent-profile-page .status-badge.expired {
+            background: #f5f5f5;
+            color: #999;
+            border: 1px solid #d9d9d9;
+        }
+        .talent-profile-page .network-chart i {
+            font-size: 80px;
+            color: #d9d9d9;
+            margin-bottom: 16px;
+        }
+        .talent-profile-page .network-chart p {
+            color: #999;
+            font-size: 14px;
+        }
+        .talent-profile-page .fund-chart {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+        }
+        .talent-profile-page .pie-chart {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            position: relative;
+        }
+        .talent-profile-page .pie-legend {
+            margin-left: 40px;
+        }
+
+        /* 企业合作详情样式 */
+        .talent-profile-page .company-detail-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 24px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid #e8e8e8;
+        }
+        .talent-profile-page .company-detail-logo {
+            width: 80px;
+            height: 80px;
+            background: #f5f7fa;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .talent-profile-page .company-detail-info h3 {
+            font-size: 24px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+        }
+        .talent-profile-page .company-detail-info p {
+            font-size: 14px;
+            color: #666;
+        }
+        .talent-profile-page .cooperation-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+        .talent-profile-page .project-detail-card {
+            background: #f5f7fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid #e8e8e8;
+        }
+        .talent-profile-page .project-detail-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 16px;
+        }
+        .talent-profile-page .project-detail-desc {
+            font-size: 13px;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+        .talent-profile-page .project-output-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-top: 16px;
+        }
+        .talent-profile-page .output-list-title i {
+            color: #1890ff;
+        }
+        .talent-profile-page .fund-usage-chart {
+            background: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 16px;
+        }
+        .talent-profile-page .fund-usage-label span:first-child {
+            color: #666;
+        }
+        .talent-profile-page .fund-usage-label span:last-child {
+            color: #333;
+            font-weight: 600;
+        }
+        .talent-profile-page .section-score {
+            margin-left: auto;
+            font-size: 13px;
+            color: #1890ff;
+            font-weight: 500;
+        }
+        .talent-profile-page .award-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .talent-profile-page .award-card {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px;
+            background: #f5f7fa;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .talent-profile-page .award-card:hover {
+            background: #e6f7ff;
+            border: 1px solid #91d5ff;
+        }
+        .talent-profile-page .award-icon {
+            width: 48px;
+            height: 48px;
+            background: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+        .talent-profile-page .award-info {
+            flex: 1;
+        }
+        .talent-profile-page .award-name {
+            font-size: 12px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 4px;
+        }
+        .talent-profile-page .award-year {
+            font-size: 12px;
+            color: #999;
+            margin-bottom: 2px;
+        }
+        .talent-profile-page .award-reason {
+            font-size: 12px;
+            color: #666;
+        }
+        .talent-profile-page .ideology-chart {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .talent-profile-page .ideology-dimension {
+            background: #f5f7fa;
+            border-radius: 8px;
+            padding: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .talent-profile-page .ideology-dimension:hover {
+            background: #e6f7ff;
+        }
+        .talent-profile-page .dimension-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        .talent-profile-page .dimension-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+        }
+        .talent-profile-page .dimension-score {
+            font-size: 16px;
+            font-weight: 700;
+            color: #1890ff;
+        }
+        .talent-profile-page .dimension-progress {
+            height: 8px;
+            background: #e8e8e8;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 8px;
+        }
+        .talent-profile-page .dimension-bar {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.3s;
+        }
+        .talent-profile-page .sentiment-analysis {
+            background: #f5f7fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .talent-profile-page .sentiment-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+        .talent-profile-page .sentiment-item.positive .sentiment-bar {
+            background: linear-gradient(90deg, #52c41a, #73d13d);
+        }
+        .talent-profile-page .sentiment-item.neutral .sentiment-bar {
+            background: linear-gradient(90deg, #999, #bbb);
+        }
+        .talent-profile-page .sentiment-item.negative .sentiment-bar {
+            background: linear-gradient(90deg, #f5222d, #ff4d4f);
+        }
+        .talent-profile-page .stat-item {
+            flex: 1;
+            text-align: center;
+            padding: 12px;
+            background: rgba(255,255,255,0.15);
+            border-radius: 8px;
+        }
+        .talent-profile-page .stat-item .stat-value {
+            display: block;
+            font-size: 24px;
+            font-weight: 700;
+            color: white;
+        }
+        .talent-profile-page .stat-item .stat-label {
+            display: block;
+            font-size: 12px;
+            color: rgba(255,255,255,0.8);
+            margin-top: 4px;
+        }
+        .talent-profile-page .filter-btn {
+            padding: 6px 16px;
+            border: 1px solid #e8e8e8;
+            background: white;
+            border-radius: 20px;
+            font-size: 13px;
+            color: #666;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .talent-profile-page .filter-btn:hover {
+            border-color: #1890ff;
+            color: #1890ff;
+        }
+        .talent-profile-page .filter-btn.active {
+            background: #1890ff;
+            border-color: #1890ff;
+            color: white;
+        }
+        .talent-profile-page .report-item {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 16px;
+            margin-bottom: 12px;
+            transition: all 0.3s;
+        }
+        .talent-profile-page .report-item:last-child {
+            margin-bottom: 0;
+        }
+        .talent-profile-page .report-item:hover {
+            background: #f0f5ff;
+            transform: translateX(4px);
+        }
+        .talent-profile-page .report-title {
+            flex: 1;
+            font-size: 12px;
+            font-weight: 600;
+            color: #333;
+            line-height: 1.5;
+        }
+        .talent-profile-page .sentiment-tag.positive {
+            background: #f6ffed;
+            color: #52c41a;
+            border: 1px solid #b7eb8f;
+        }
+        .talent-profile-page .sentiment-tag.neutral {
+            background: #fafafa;
+            color: #666;
+            border: 1px solid #d9d9d9;
+        }
+        .talent-profile-page .sentiment-tag.negative {
+            background: #fff2f0;
+            color: #f5222d;
+            border: 1px solid #ffccc7;
+        }
+        .talent-profile-page .report-meta span {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .talent-profile-page .report-summary {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.7;
+            margin-bottom: 12px;
+        }
+        .talent-profile-page .report-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: #1890ff;
+            font-size: 13px;
+            text-decoration: none;
+            padding: 6px 12px;
+            background: #e6f7ff;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+        .talent-profile-page .report-link:hover {
+            background: #1890ff;
+            color: white;
+        }
+        .talent-profile-page .topic-tag {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: #e6f7ff;
+            border: 1px solid #91d5ff;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .talent-profile-page .topic-tag:hover {
+            background: #1890ff;
+            border-color: #1890ff;
+        }
+        .talent-profile-page .value-quote {
+            padding: 16px;
+            background: #f5f7fa;
+            border-radius: 8px;
+            border-left: 4px solid #1890ff;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .talent-profile-page .value-quote:hover {
+            background: #e6f7ff;
+        }
+
+        /* 媒体报道样式 */
+        .talent-profile-page .media-reports {
+            background: linear-gradient(135deg, #fff 0%, #f8fbff 100%);
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 20px;
+            border: 1px solid #e8f0fe;
+            box-shadow: 0 2px 12px rgba(24, 144, 255, 0.08);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .talent-profile-page .media-reports:hover {
+            box-shadow: 0 4px 20px rgba(24, 144, 255, 0.15);
+            transform: translateY(-2px);
+            border-color: #1890ff;
+        }
+        .talent-profile-page .media-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding-bottom: 16px;
+            border-bottom: 1px dashed #d9e8ff;
+            margin-bottom: 16px;
+        }
+        .talent-profile-page .media-header i.fa-newspaper {
+            font-size: 22px;
+            color: #1890ff;
+            background: linear-gradient(135deg, #1890ff 0%, #36cfc9 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .talent-profile-page .media-header span:first-of-type {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+        }
+        .talent-profile-page .media-count {
+            font-size: 13px;
+            color: #1890ff;
+            background: #e6f7ff;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-weight: 500;
+        }
+        .talent-profile-page .media-header i.fa-chevron-right {
+            color: #1890ff;
+            font-size: 14px;
+            transition: transform 0.3s;
+        }
+        .talent-profile-page .media-reports.expanded .media-header i.fa-chevron-right {
+            transform: rotate(90deg);
+        }
+        .talent-profile-page .media-reports:hover .media-header i.fa-chevron-right {
+            transform: translateX(4px);
+        }
+        
+        /* 媒体报道展开列表样式 */
+        .talent-profile-page .media-expand-list {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out, opacity 0.3s ease;
+            opacity: 0;
+        }
+        .talent-profile-page .media-expand-list.expanded {
+            max-height: 2000px;
+            opacity: 1;
+            margin-top: 20px;
+        }
+        .talent-profile-page .media-expand-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        .talent-profile-page .media-expand-stats {
+            display: flex;
+            gap: 16px;
+        }
+        .talent-profile-page .media-stat-badge.total {
+            background: linear-gradient(135deg, #1890ff, #722ed1);
+            color: white;
+        }
+        .talent-profile-page .media-stat-badge.positive {
+            background: #f6ffed;
+            color: #52c41a;
+            border: 1px solid #b7eb8f;
+        }
+        .talent-profile-page .media-stat-badge.neutral {
+            background: #fafafa;
+            color: #666;
+            border: 1px solid #d9d9d9;
+        }
+        .talent-profile-page .media-stat-badge.negative {
+            background: #fff2f0;
+            color: #f5222d;
+            border: 1px solid #ffccc7;
+        }
+        .talent-profile-page .expand-reports-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+        @media (max-width: 768px) {
+            .talent-profile-page .expand-reports-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        .talent-profile-page .expand-report-card {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 16px;
+            transition: all 0.3s;
+            border: 1px solid transparent;
+        }
+        .talent-profile-page .expand-report-card:hover {
+            background: white;
+            border-color: #1890ff;
+            box-shadow: 0 4px 14px rgba(24,144,255,0.12);
+            transform: translateY(-2px);
+        }
+        .talent-profile-page .expand-report-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        .talent-profile-page .expand-report-index {
+            width: 22px;
+            height: 22px;
+            background: #1890ff;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+        .talent-profile-page .expand-report-title {
+            flex: 1;
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+            line-height: 1.4;
+        }
+        .talent-profile-page .expand-report-meta {
+            display: flex;
+            gap: 16px;
+            font-size: 12px;
+            color: #999;
+            margin-bottom: 8px;
+        }
+        .talent-profile-page .expand-report-meta span {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .talent-profile-page .expand-report-summary {
+            font-size: 13px;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        /* ===== 列表检索页 + 详情工具栏（来自 talent-profile-list.css，加 .talent-profile-page 前缀） ===== */
+        .talent-profile-page .profile-list-page { display: none; gap: 16px; }
+        .talent-profile-page .profile-list-page.active { display: grid; }
+        .talent-profile-page .profile-detail-page.active { display: block; }
+
+        .talent-profile-page .profile-list-filter,
+        .talent-profile-page .profile-result-card { box-sizing: border-box; width: 100%; border: 1px solid #e8e8e8; border-radius: 8px; background: #fff; box-shadow: 0 2px 8px rgba(31, 35, 41, .04); }
+        .talent-profile-page .profile-list-filter { padding: 18px 20px 20px; }
+        .talent-profile-page .profile-list-filter-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 16px; }
+        .talent-profile-page .profile-list-filter-head h2,
+        .talent-profile-page .profile-result-heading h2 { margin: 0; color: #1d2129; font-size: 17px; font-weight: 600; }
+        .talent-profile-page .profile-list-filter-head p { margin: 6px 0 0; color: #86909c; font-size: 12px; }
+        .talent-profile-page .profile-filter-search { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
+        .talent-profile-page .profile-filter-search input { box-sizing: border-box; flex: 1; min-width: 0; height: 36px; padding: 0 11px; border: 1px solid #dfe4ea; border-radius: 5px; outline: none; color: #1d2129; background: #fff; font-size: 12px; }
+        .talent-profile-page .profile-filter-search input::placeholder { font-size: 12px; color: #a9b4c5; }
+        .talent-profile-page .profile-filter-search input:focus { border-color: #1677ff; box-shadow: 0 0 0 2px rgba(22, 119, 255, .1); }
+        .talent-profile-page .profile-filter-search button { flex: 0 0 auto; height: 36px; padding: 0 16px; border-radius: 5px; font-size: 12px; cursor: pointer; }
+        .talent-profile-page .profile-filter-primary { border: 1px solid #1677ff; color: #fff; background: #1677ff; }
+        .talent-profile-page .profile-filter-primary:hover { border-color: #0e65e5; background: #0e65e5; }
+        .talent-profile-page .profile-filter-secondary { border: 1px solid #d9dfe7; color: #4e5969; background: #fff; }
+        .talent-profile-page .profile-filter-secondary:hover { border-color: #1677ff; color: #1677ff; }
+        .talent-profile-page .profile-filter-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+        .talent-profile-page .profile-filter-grid select { box-sizing: border-box; width: 100%; height: 34px; padding: 0 9px; border: 1px solid #e5e6eb; border-radius: 4px; outline: none; color: #4e5969; background: #fff; font-size: 12px; }
+        .talent-profile-page .profile-filter-grid select:focus { border-color: #1677ff; }
+
+        .talent-profile-page .profile-result-card { overflow: hidden; }
+        .talent-profile-page .profile-result-heading { display: flex; align-items: center; justify-content: space-between; gap: 14px; min-height: 62px; padding: 0 20px; border-bottom: 1px solid #edf0f5; }
+        .talent-profile-page .profile-result-heading span { color: #86909c; font-size: 12px; }
+        .talent-profile-page .profile-result-heading h2 + span { display: block; margin-top: 5px; }
+        .talent-profile-page .profile-result-hint { color: #86909c; font-size: 12px; }
+        .talent-profile-page .profile-result-table-wrap { width: 100%; overflow-x: auto; }
+        .talent-profile-page .profile-result-table { min-width: 980px; }
+        .talent-profile-page .profile-result-header,
+        .talent-profile-page .profile-result-row { display: grid; grid-template-columns: minmax(155px, 1.2fr) minmax(120px, .95fr) minmax(135px, 1.1fr) minmax(115px, .9fr) minmax(110px, .85fr) 88px 82px 92px; align-items: center; column-gap: 14px; }
+        .talent-profile-page .profile-result-header { min-height: 44px; padding: 0 20px; color: #7a869a; background: #f5f9ff; font-size: 11px; font-weight: 600; }
+        .talent-profile-page .profile-result-row { min-height: 84px; padding: 12px 20px; border-bottom: 1px solid #edf0f5; cursor: pointer; transition: background .16s ease; }
+        .talent-profile-page .profile-result-row:last-child { border-bottom: 0; }
+        .talent-profile-page .profile-result-row:hover,
+        .talent-profile-page .profile-result-row:focus-visible { outline: none; background: #f7faff; }
+        .talent-profile-page .profile-result-person { display: flex; align-items: center; gap: 10px; min-width: 0; }
+        .talent-profile-page .profile-result-avatar { display: grid; flex: 0 0 auto; place-items: center; width: 42px; height: 42px; border-radius: 50%; color: #fff; background: linear-gradient(135deg, #2a8cff, #1668dc); font-size: 17px; font-weight: 600; }
+        .talent-profile-page .profile-result-person-copy { display: grid; min-width: 0; gap: 4px; }
+        .talent-profile-page .profile-result-name { width: fit-content; padding: 0; border: 0; color: #1d2129; background: transparent; font-size: 14px; font-weight: 600; cursor: pointer; }
+        .talent-profile-page .profile-result-name:hover { color: #1677ff; }
+        .talent-profile-page .profile-result-person-copy small,
+        .talent-profile-page .profile-result-project small,
+        .talent-profile-page .profile-result-impact small,
+        .talent-profile-page .profile-result-activity small { overflow: hidden; color: #98a3b3; font-size: 10px; line-height: 1.2; text-overflow: ellipsis; white-space: nowrap; }
+        .talent-profile-page .profile-result-institution,
+        .talent-profile-page .profile-result-outcome { overflow: hidden; color: #4e5969; font-size: 11px; line-height: 1.45; text-overflow: ellipsis; }
+        .talent-profile-page .profile-result-field { display: grid; gap: 5px; min-width: 0; }
+        .talent-profile-page .profile-result-field b { overflow: hidden; color: #1677ff; font-size: 12px; font-weight: 500; text-overflow: ellipsis; white-space: nowrap; }
+        .talent-profile-page .profile-result-field span { display: flex; flex-wrap: wrap; gap: 3px; }
+        .talent-profile-page .profile-result-field em { max-width: 72px; overflow: hidden; padding: 2px 5px; border-radius: 3px; color: #1677ff; background: #edf5ff; font-size: 9px; font-style: normal; text-overflow: ellipsis; white-space: nowrap; }
+        .talent-profile-page .profile-result-project,
+        .talent-profile-page .profile-result-impact,
+        .talent-profile-page .profile-result-activity { display: grid; gap: 4px; min-width: 0; }
+        .talent-profile-page .profile-result-project b { color: #4e5969; font-size: 12px; font-weight: 500; }
+        .talent-profile-page .profile-result-impact b { color: #1677ff; font-size: 16px; }
+        .talent-profile-page .profile-result-activity b { color: #52a22c; font-size: 11px; font-weight: 500; }
+        .talent-profile-page .profile-result-operation { display: flex; justify-content: flex-start; }
+        .talent-profile-page .profile-result-view { height: 30px; padding: 0 9px; border: 1px solid #bed5ff; border-radius: 4px; color: #165dff; background: #fff; font-size: 11px; white-space: nowrap; cursor: pointer; }
+        .talent-profile-page .profile-result-view:hover { border-color: #1677ff; background: #edf5ff; }
+        .talent-profile-page .profile-result-empty { padding: 48px 16px; color: #86909c; font-size: 12px; text-align: center; }
+        .talent-profile-page .profile-result-pagination { display: flex; align-items: center; justify-content: flex-end; gap: 12px; min-height: 58px; padding: 0 20px; color: #86909c; font-size: 11px; }
+        .talent-profile-page .profile-pagination-pages { display: flex; align-items: center; gap: 4px; }
+        .talent-profile-page .profile-pagination-pages button { min-width: 30px; height: 30px; padding: 0 8px; border: 1px solid #e5e6eb; border-radius: 4px; color: #4e5969; background: #fff; font-size: 11px; cursor: pointer; }
+        .talent-profile-page .profile-pagination-pages button:hover:not(:disabled) { border-color: #1677ff; color: #1677ff; }
+        .talent-profile-page .profile-pagination-pages button.active { border-color: #1677ff; color: #fff; background: #1677ff; }
+        .talent-profile-page .profile-pagination-pages button:disabled { color: #c9cdd4; background: #f7f8fa; cursor: not-allowed; }
+        .talent-profile-page .profile-pagination-ellipsis { min-width: 18px; color: #86909c; font-size: 11px; text-align: center; user-select: none; }
+
+        @media (max-width: 900px) {
+          .talent-profile-page .profile-filter-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        }
+
+        @media (max-width: 560px) {
+          .talent-profile-page .profile-list-filter { padding: 15px; }
+          .talent-profile-page .profile-list-filter-head { display: block; }
+          .talent-profile-page .profile-filter-search { flex-wrap: wrap; }
+          .talent-profile-page .profile-filter-search input { flex-basis: 100%; }
+          .talent-profile-page .profile-filter-search button { flex: 1; }
+          .talent-profile-page .profile-filter-grid { grid-template-columns: 1fr; }
+          .talent-profile-page .profile-result-heading { align-items: flex-start; flex-direction: column; justify-content: center; gap: 5px; padding: 12px 15px; }
+          .talent-profile-page .profile-result-pagination { justify-content: flex-start; flex-wrap: wrap; gap: 7px; padding: 8px 15px; }
+          .talent-profile-page .profile-detail-actions { justify-content: flex-start; margin-left: 0; }
+        }
+    
